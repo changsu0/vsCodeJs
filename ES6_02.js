@@ -72,31 +72,3 @@ class Person{
 let person = new Person('hhh');
 person.printNameArrow()
 person.printNameFunction()
-
-console.log(  )
-
-console.log('-------------------------- addEventListener ------------------------------------');
-
-// 필터 
-// return List<Map>
-
-console.log(  )
-
-console.log('-------------------------- addEventListener ------------------------------------');
-
-// 필터 
-// return List<Map>
-
-console.log(  )
-
-console.log('-------------------------- addEventListener ------------------------------------');
-
-// 필터 
-// return List<Map>
-
-console.log(  )
-
-console.log('-------------------------- addEventListener ------------------------------------');
-
-// 필터 
-// return List<Map>
