@@ -1,3 +1,86 @@
+
+/**************************** 상수 선언 시작 ****************************/
+const loopCnt = 100;
+const minRange = 1;
+const maxRange = 50;
+const diffCnt = 7;
+const continuityCnt = 5;
+/**************************** 상수 선언 종료 ****************************/
+
+
+/**************************** 함수 선언 시작 ****************************/
+const fn_randomNum = function (min, max){
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
+
+const fn_arrSum = function(arrItem){
+    return arrItem.reduce((currentTotal, inItem) => {
+        return inItem + currentTotal;
+    }, 0);
+}
+/**************************** 함수 선언 종료 ****************************/
+
+
+/**************************** 전역변수 선언 시작 ****************************/
+let beforeNum = 0;
+let arrVal = new Array();
+let arrRst = new Array();
+let arrIdxVal = new Array();
+let arrIdxRst = new Array();
+/**************************** 전역변수 선언 종료 ****************************/
+
+
+/**************************** 값 비교를 위한 Loop 시작 ****************************/
+for (let idx = 0; idx < loopCnt; idx++) {
+    let ranNum = fn_randomNum( minRange, maxRange );
+    
+    if (beforeNum > 0) {
+        let diffVal = Math.abs( ranNum - beforeNum );
+        if (diffVal > diffCnt) {
+            arrVal.push( beforeNum );
+            arrIdxVal.push( idx );
+        }else{
+            if (arrVal.length >= continuityCnt) {
+                arrRst.push( arrVal );
+                arrIdxRst.push( arrIdxVal )
+            }
+            arrVal = new Array();
+            arrIdxVal = new Array();
+        }
+    }
+    beforeNum = ranNum;
+}
+/**************************** 값 비교를 위한 Loop 종료 ****************************/
+
+
+/**************************** 결과를 보기위한 forEach 시작 ****************************/
+arrRst.forEach((item, idx) => {
+    console.log(item);
+    console.log(arrIdxRst[idx]);    
+    
+    const total = fn_arrSum(item);
+    const arrHistory = arrIdxRst[idx];
+
+    let strResult = '';
+        strResult += '시작값 : ' + item[0] + ', 마지막값 : ' + item[item.length - 1] + ', 합계 : ' + total + ', 평균 : ' +  Number(total / item.length);
+        strResult += ' || 시작 Idx : ' + arrHistory[0] + ', 마지막 Idx : ' + arrHistory[arrHistory.length - 1] + ', 연속 Cnt : ' + arrHistory.length + '회';
+    console.log( strResult );
+});
+/**************************** 결과를 보기위한 forEach 종료 ****************************/
+
+
+
+
+
+/***************************************************************** 코드설명 Version ***************************************************************/
+
+
+
+
+
+/**************************** 상수 선언 시작 ****************************/
 // 루프 카운트
 const loopCnt = 100;
 // 난수 Min 범위
@@ -8,14 +91,29 @@ const maxRange = 50;
 const diffCnt = 7;
 // 연속 카운트
 const continuityCnt = 5;
+/**************************** 상수 선언 종료 ****************************/
 
+
+/**************************** 함수 선언 시작 ****************************/
 // 최대값을 포함하는 정수 난수 생성하기
-const randomNum = function (min, max){
+const fn_randomNum = function (min, max){
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min; //최대값, 최소값도 포함
 }
 
+// reduce 
+// Desc : Total값 Sum
+// return Number
+const fn_arrSum = function(arrItem){
+    return arrItem.reduce((currentTotal, inItem) => {
+        return inItem + currentTotal;
+    }, 0);
+}
+/**************************** 함수 선언 종료 ****************************/
+
+
+/**************************** 전역변수 선언 시작 ****************************/
 // 이전 값
 let beforeNum = 0;
 // 연속된 값 저장 배열
@@ -28,11 +126,13 @@ let arrRst = new Array();
 let arrIdxVal = new Array();
 // 결과 idx 저장 배열
 let arrIdxRst = new Array();
+/**************************** 전역변수 선언 종료 ****************************/
 
-// Loop
+
+/**************************** 값 비교를 위한 Loop 시작 ****************************/
 for (let idx = 0; idx < loopCnt; idx++) {
     // Loop 돌때마다 난수 발생
-    let ranNum = randomNum( minRange, maxRange );
+    let ranNum = fn_randomNum( minRange, maxRange );
     
     // 이전 값이 0 이상일때 동작
     if (beforeNum > 0) {
@@ -63,20 +163,17 @@ for (let idx = 0; idx < loopCnt; idx++) {
     // 이전 값 변수에 현재값 담기
     beforeNum = ranNum;
 }
+/**************************** 값 비교를 위한 Loop 종료 ****************************/
 
-// 결과를 보기위한 forEach
+
+/**************************** 결과를 보기위한 forEach 시작 ****************************/
 arrRst.forEach((item, idx) => {
     // 차이가 난 연속값 배열
     console.log(item);
     // 차이가 났을때 Idx값 배열
-    console.log(arrIdxRst[idx]);
+    console.log(arrIdxRst[idx]);    
     
-    // reduce 
-    // Desc : Total값 Sum
-    // return Number
-    const total = item.reduce((currentTotal, inItem) => {
-        return inItem + currentTotal;
-    }, 0);
+    const total = fn_arrSum(item);
 
     // Log용 Idx배열 추출
     const arrHistory = arrIdxRst[idx];
@@ -87,6 +184,7 @@ arrRst.forEach((item, idx) => {
         // 로그를 위한 Idx
         strResult += ' || 시작 Idx : ' + arrHistory[0] + ', 마지막 Idx : ' + arrHistory[arrHistory.length - 1] + ', 연속 Cnt : ' + arrHistory.length + '회';
     
-        // 수고링^^
+    // 수고링^^
     console.log( strResult );
 });
+/**************************** 결과를 보기위한 forEach 종료 ****************************/
