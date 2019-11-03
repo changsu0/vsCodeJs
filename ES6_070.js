@@ -80,8 +80,8 @@ for (let idx = 0; idx < loopCnt; idx++) {
 
 /**************************** 결과를 보기위한 forEach 시작 ****************************/
 arrRst.forEach((item, idx) => {
-    console.log('이전 값 배열 : ', item);
-    console.log('for Index 배열 : ', arrIdxRst[idx]);    
+    console.log('Val 배열 : ', item);
+    console.log('Idx 배열 : ', arrIdxRst[idx]);    
     
     const total = fn_arrSum(item);
     const arrHistory = arrIdxRst[idx];
