@@ -168,6 +168,10 @@ const fn_btnAlert = function(name, age, phone, email, birth, hobby, specialty){
 
 let innerHtml = '';
 
+// const filteredItems = g_tableData.filter((item) => {
+//     return item.specialty === 'S02'
+// });
+
 g_tableData.forEach((item, index) => {
     innerHtml += '<tr>';
     innerHtml += '<td>' + Number(index+1) + '</td>';
@@ -182,7 +186,7 @@ g_tableData.forEach((item, index) => {
                 + fn_phoneNoGubun(item.phone) + '\', \'' + item.email + '\', \'' + fn_birthComma(item.birth) + '\', \'' 
                 + fn_hobbyVal(item.hobby) + '\', \'' + fn_specialtyVal(item.specialty) + '\')">' + item.name + '</button></td>';
     innerHtml += '</tr>';
-})
+});
 
 
 $( document ).ready(function() {
