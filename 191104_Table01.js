@@ -95,12 +95,12 @@ let fn_specialtyVal = function(code){
 
 let fn_btnAlert = function(name, age, phone, email, birth, hobby, specialty){
     let strInfo = '';
-        strInfo += '이름 : '        + name                         + ' / ';
-        strInfo += '나이 : '        + age                          + ' / ';
-        strInfo += '전화번호 : '    + fn_phoneNoGubun(phone)       + ' / ';
-        strInfo += '이메일 : '      + email                        + ' / ';
-        strInfo += '생일 : '        + fn_birthComma(birth)         + ' / ';
-        strInfo += '취미 : '        + hobby                         + ' / ';
+        strInfo += '이름 : '        + name      + ' / ';
+        strInfo += '나이 : '        + age       + ' / ';
+        strInfo += '전화번호 : '    + phone     + ' / ';
+        strInfo += '이메일 : '      + email     + ' / ';
+        strInfo += '생일 : '        + birth     + ' / ';
+        strInfo += '취미 : '        + hobby     + ' / ';
         strInfo += '특기 : '        + specialty;
     alert( strInfo );
 }
