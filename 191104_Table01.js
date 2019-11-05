@@ -49,6 +49,11 @@ g_tableData.push(rowData);
 rowData = {name : 'WangJuarez', age : 28, phone : '01013467965', email : 'WangJuarez@naver.com', birth : '720307', hobby : 'H02', specialty : 'S02'};
 g_tableData.push(rowData);
 
+/**
+|--------------------------------------------------
+| 취미 공통코드
+|--------------------------------------------------
+*/
 const g_hobby = [
     {code : 'H01', value : '숨쉬기'},
     {code : 'H02', value : '담배'},
@@ -58,32 +63,51 @@ const g_hobby = [
     {code : 'H06', value : '독서'},
     {code : 'H07', value : '여행'},
 ];
-
+/**
+|--------------------------------------------------
+| 특기 공통코드
+|--------------------------------------------------
+*/
 const g_specialty = [
     {code : 'S01', value : '먹기'},
     {code : 'S02', value : '자기'},
     {code : 'S03', value : '싸기'},
 ];
-
-let fn_phoneNoGubun = function(num){
+/**
+|--------------------------------------------------
+| 핸드폰번호 구분 '-'
+|--------------------------------------------------
+*/
+const fn_phoneNoGubun = function(num){
     return num.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
 }
-
-let fn_birthComma = function(birth){
+/**
+|--------------------------------------------------
+| 생년월일 구분 '.'
+|--------------------------------------------------
+*/
+const fn_birthComma = function(birth){
     return birth.replace(/([0-9]{2})([0-9]+)([0-9]{2})/,"$1.$2.$3");
 }
-
-let fn_hobbyVal = function(code){
-    let strHobbyVal = '';
-    g_hobby.forEach((item) => {
+/**
+|--------------------------------------------------
+| 취미 Val찾기
+|--------------------------------------------------
+*/
+const fn_hobbyVal = function(code){
+    let findVal = g_hobby.find((item) => {
         if (item.code === code) {
-            strHobbyVal = item.value;
+            return item;
         }
     });
-    return strHobbyVal;
+    return findVal.value;
 }
-
-let fn_specialtyVal = function(code){
+/**
+|--------------------------------------------------
+| 특기 Val찾기
+|--------------------------------------------------
+*/
+const fn_specialtyVal = function(code){
     let strSpecialtyVal = '';
     g_specialty.forEach((item) => {
         if (item.code === code) {
@@ -92,8 +116,45 @@ let fn_specialtyVal = function(code){
     });
     return strSpecialtyVal;
 }
-
-let fn_btnAlert = function(name, age, phone, email, birth, hobby, specialty){
+/**
+|--------------------------------------------------
+| SelectBox 만들기
+|--------------------------------------------------
+*/
+const fn_makeSelBox = function(objCode, defaultCode, selID){
+    let strSel = '<select id="' + selID + '">';
+    objCode.forEach((item) => {
+        if (defaultCode === item.code) {
+            strSel += '<option value="' + item.code + '" selected="selected">' + item.value + '</option>';
+        } else {
+            strSel += '<option value="' + item.code + '">' + item.value + '</option>';
+        }
+    });
+    strSel += '</select>';
+    return strSel;
+}
+/**
+|--------------------------------------------------
+| Radio 만들기
+|--------------------------------------------------
+*/
+const fn_makeRadio = function(objCode, defaultCode, rdoName){
+    let strSel = '';
+    objCode.forEach((item) => {
+        if (defaultCode === item.code) {
+            strSel += '<input type="radio" name="' + rdoName + '" value="' + item.code + '" checked="checked" /> ' + item.value;
+        } else {
+            strSel += '<input type="radio" name="' + rdoName + '" value="' + item.code + '" /> ' + item.value;
+        }
+    });
+    return strSel;
+}
+/**
+|--------------------------------------------------
+| Alert Event
+|--------------------------------------------------
+*/
+const fn_btnAlert = function(name, age, phone, email, birth, hobby, specialty){
     let strInfo = '';
         strInfo += '이름 : '        + name      + ' / ';
         strInfo += '나이 : '        + age       + ' / ';
@@ -115,9 +176,11 @@ g_tableData.forEach((item, index) => {
     innerHtml += '<td>' + fn_phoneNoGubun(item.phone) + '</td>';
     innerHtml += '<td>' + item.email + '</td>';
     innerHtml += '<td>' + fn_birthComma(item.birth) + '</td>';
-    innerHtml += '<td>' + fn_hobbyVal(item.hobby) + '</td>';
-    innerHtml += '<td>' + fn_specialtyVal(item.specialty) + '</td>';
-    innerHtml += '<td><button onclick="fn_btnAlert(\'' + item.name + '\', \'' + item.age + '\', \'' + fn_phoneNoGubun(item.phone) + '\', \'' + item.email + '\', \'' + fn_birthComma(item.birth) + '\', \'' + fn_hobbyVal(item.hobby) + '\', \'' + fn_specialtyVal(item.specialty) + '\')">' + item.name + '</button></td>';
+    innerHtml += '<td>' + fn_makeSelBox(g_hobby, item.hobby, 'selHobby'+index) + '</td>';
+    innerHtml += '<td>' + fn_makeRadio(g_specialty, item.specialty, 'rdoSpecialty'+index) + '</td>';
+    innerHtml += '<td><button onclick="fn_btnAlert(\'' + item.name + '\', \'' + item.age + '\', \'' 
+                + fn_phoneNoGubun(item.phone) + '\', \'' + item.email + '\', \'' + fn_birthComma(item.birth) + '\', \'' 
+                + fn_hobbyVal(item.hobby) + '\', \'' + fn_specialtyVal(item.specialty) + '\')">' + item.name + '</button></td>';
     innerHtml += '</tr>';
 })
 
