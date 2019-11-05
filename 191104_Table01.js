@@ -65,6 +65,46 @@ const g_specialty = [
     {code : 'S03', value : '싸기'},
 ];
 
+let fn_phoneNoGubun = function(num){
+    return num.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
+}
+
+let fn_birthComma = function(birth){
+    return birth.replace(/([0-9]{2})([0-9]+)([0-9]{2})/,"$1.$2.$3");
+}
+
+let fn_hobbyVal = function(code){
+    let strHobbyVal = '';
+    g_hobby.forEach((item) => {
+        if (item.code === code) {
+            strHobbyVal = item.value;
+        }
+    });
+    return strHobbyVal;
+}
+
+let fn_specialtyVal = function(code){
+    let strSpecialtyVal = '';
+    g_specialty.forEach((item) => {
+        if (item.code === code) {
+            strSpecialtyVal = item.value;
+        }
+    });
+    return strSpecialtyVal;
+}
+
+let fn_btnAlert = function(name, age, phone, email, birth, hobby, specialty){
+    let strInfo = '';
+        strInfo += '이름 : '        + name                         + ' / ';
+        strInfo += '나이 : '        + age                          + ' / ';
+        strInfo += '전화번호 : '    + fn_phoneNoGubun(phone)       + ' / ';
+        strInfo += '이메일 : '      + email                        + ' / ';
+        strInfo += '생일 : '        + fn_birthComma(birth)         + ' / ';
+        strInfo += '취미 : '        + hobby                         + ' / ';
+        strInfo += '특기 : '        + specialty;
+    alert( strInfo );
+}
+
 let innerHtml = '';
 
 g_tableData.forEach((item, index) => {
@@ -72,17 +112,16 @@ g_tableData.forEach((item, index) => {
     innerHtml += '<td>' + Number(index+1) + '</td>';
     innerHtml += '<td>' + item.name + '</td>';
     innerHtml += '<td>' + item.age + '</td>';
-    innerHtml += '<td>' + item.phone + '</td>';
+    innerHtml += '<td>' + fn_phoneNoGubun(item.phone) + '</td>';
     innerHtml += '<td>' + item.email + '</td>';
-    innerHtml += '<td>' + item.birth + '</td>';
-    innerHtml += '<td>' + item.hobby + '</td>';
-    innerHtml += '<td>' + item.specialty + '</td>';
-    innerHtml += '<td><button>' + item.name + '</button></td>';
+    innerHtml += '<td>' + fn_birthComma(item.birth) + '</td>';
+    innerHtml += '<td>' + fn_hobbyVal(item.hobby) + '</td>';
+    innerHtml += '<td>' + fn_specialtyVal(item.specialty) + '</td>';
+    innerHtml += '<td><button onclick="fn_btnAlert(\'' + item.name + '\', \'' + item.age + '\', \'' + fn_phoneNoGubun(item.phone) + '\', \'' + item.email + '\', \'' + fn_birthComma(item.birth) + '\', \'' + fn_hobbyVal(item.hobby) + '\', \'' + fn_specialtyVal(item.specialty) + '\')">' + item.name + '</button></td>';
     innerHtml += '</tr>';
 })
 
 
 $( document ).ready(function() {
     $('#primaryTbody').html(innerHtml);
-    // $('#successTbody').html(innerHtmlFilter);
 });
