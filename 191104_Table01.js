@@ -169,7 +169,9 @@ const fn_btnAlert = function(name, age, phone, email, birth, hobby, specialty){
 let innerHtml = '';
 
 // const filteredItems = g_tableData.filter((item) => {
-//     return item.specialty === 'S02'
+//     // return item.specialty === 'S01'
+//     // return item.hobby === 'H05'
+//     return item.age <= 25
 // });
 
 g_tableData.forEach((item, index) => {
