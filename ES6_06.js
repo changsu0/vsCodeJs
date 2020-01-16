@@ -24,7 +24,6 @@ let obj = {
 for (var prop in obj) {
     console.log(prop, obj[prop]); // a 1, b 2, c 3
 }
- 
 
 console.log('-------------------------- 많이 쓰는 문제 (있나없나 체크) ------------------------------------');
 
@@ -39,7 +38,8 @@ const randomNum = function (min, max){
 }
 
 
-// 무작위 난수를 30번 발생시켜 숫자 25가 나오면 alert( '당첨' ), 숫자 25가 없으면 console.log( '꽝!' )을 출력하세요
+// 무작위 난수를 30번 발생시켜 숫자 25가 나오면 alert( '당첨' ), 
+// 숫자 25가 없으면 console.log( '꽝!' )을 출력하세요
 
 let loopCnt = 5;
 let minCnt = 1 ;
